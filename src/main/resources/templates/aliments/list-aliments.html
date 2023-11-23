@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+	<title>Aliments</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>Inventaire</h3>
+	<hr>
+	
+	<!--  Add a button  -->
+	<a th:href="@{/aliments/showFormForAdd}"
+	class="btn btn-primary btn-sm mb-3">
+		Ajouter aliment
+	</a>
+
+	<table class="table table-bordered table-striped">
+		<thead class="table-dark">
+			<tr>
+				<th>Code-barres</th>
+				<th>Nom du produit</th>
+				<th>Catégorie</th>
+				<th>Marque</th>
+				<th>Nutriscore</th>
+				<th>Allergènes</th>
+				<th>Nombre</th>
+				<th> </th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempAliment : ${aliments}">
+			
+				<td th:text="${tempAliment.code}" />	
+				<td th:text="${tempAliment.productName}" />	
+				<td th:text="${tempAliment.categoriesTags}" />	
+				<td th:text="${tempAliment.brand}" />	
+				<td th:text="${tempAliment.nutriscore}" />	
+				<td th:text="${tempAliment.allergens}" />
+				<td th:text="${tempAliment.number}" />
+				<td><a th:href="@{/aliments/showFormForUpdate(alimentId=${tempAliment.id})}" class="btn btn-info btn-sm">Modifier</a>
+				<a th:href="@{/aliments/delete(alimentId=${tempAliment.id})}" class="btn btn-danger btn-sm" onclick="if(!(confirm('Voulez-vous vraiment supprimer cet aliment ?')))return false">Supprimer</a>
+			</tr>
+		</tbody>		
+	</table>
+	
+</div>
+	
+</body>
+</html>
+
+
+
